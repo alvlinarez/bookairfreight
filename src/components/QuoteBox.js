@@ -1,31 +1,69 @@
 import React from 'react';
 import '../styles/components/QuoteBox.css';
 
-const QuoteBox = () => {
+const QuoteBox = ({ quote, delivery }) => {
+  const { startCountry, destCountry, price, channel } = quote;
+  const { startRange, endRange, startDeliverDate, endDeliverDate } = delivery;
+
+  const formatDate = (date) => {
+    const monthNames = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sept',
+      'Oct',
+      'Nov',
+      'Dec'
+    ];
+    const month = monthNames[date.getMonth()];
+    const day = date.getDate();
+    return month + ' ' + day;
+  };
+
+  const thousandCommas = (n) => {
+    return n.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  };
+
   return (
     <div className="boxContainer">
-
       <div className="deliveryContainer">
         <div className="deliveryTitle">
-          <span><i className="fas fa-plane" /></span>
-          <p>Traditional air freight</p>
+          <span>
+            {channel === 'air' ? (
+              <i className="fas fa-plane" />
+            ) : (
+              <i className="fas fa-ship" />
+            )}
+          </span>
+          <p>Traditional {channel === 'air' ? 'air' : 'ocean'} freight</p>
         </div>
         <div className="deliveryDetails">
-          <p>4-6 days</p>
+          <p>
+            {startRange}-{endRange} days
+          </p>
           <span>Estimated delivery</span>
-          <span className="deliveryDate">Sept 20 - Sept 26</span>
+          <span className="deliveryDate">
+            {formatDate(new Date(startDeliverDate))} -{' '}
+            {formatDate(new Date(endDeliverDate))}
+          </span>
         </div>
       </div>
 
       <div className="priceContainer">
         <div className="priceTitle">
-          <p>China -> USA</p>
+          <p>
+            {startCountry} -> {destCountry}
+          </p>
         </div>
         <div className="price">
-          <p>US$ 2,300</p>
+          <p>US$ {thousandCommas(price)}</p>
         </div>
       </div>
-
     </div>
   );
 };

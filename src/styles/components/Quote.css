@@ -28,6 +28,16 @@
   }
 }
 
+@media only screen and (min-width:768px) and (max-width: 992px) {
+  .quoteContainer {
+    width: 18%;
+  }
+
+  .quoteContainer select {
+    width: 40%;
+  }
+}
+
 /* End inputs container */
 
 .btn {
@@ -40,4 +50,8 @@
   cursor: pointer;
   color: #fff;
   white-space: nowrap;
+}
+
+.error {
+  color: #ff0000;
 }
