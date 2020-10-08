@@ -18,7 +18,6 @@
   },
   "homepage": "https://github.com/alvlinarez/bookairfreight#readme",
   "dependencies": {
-    "formik": "2.1.7",
     "react": "16.13.1",
     "react-dom": "16.13.1"
   },

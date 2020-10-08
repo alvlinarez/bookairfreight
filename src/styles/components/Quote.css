@@ -1,3 +1,4 @@
+/* Inputs container */
 .quoteContainer {
   display: flex;
   flex-direction: column;
@@ -16,6 +17,18 @@
 .quoteContainer select {
   width: 40%;
 }
+
+@media only screen and (max-width: 600px) {
+  .quoteContainer {
+    width: 100%;
+  }
+
+  .quoteContainer select {
+    width: 20%;
+  }
+}
+
+/* End inputs container */
 
 .btn {
   margin: 10px 0;
