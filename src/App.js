@@ -1,7 +1,13 @@
 import React from 'react';
+import Quote from './components/Quote';
+import './styles/App.css';
 
-export const App = () => {
+const App = () => {
   return (
-    <h1>React App</h1>
+    <div className="appContainer">
+      <Quote />
+    </div>
   );
 };
+
+export default App;

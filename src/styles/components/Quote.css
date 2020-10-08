@@ -1,0 +1,30 @@
+.quoteContainer {
+  display: flex;
+  flex-direction: column;
+  width: 10.5%;
+}
+
+.quoteContainer label {
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.quoteContainer input {
+  margin-bottom: 10px;
+}
+
+.quoteContainer select {
+  width: 40%;
+}
+
+.btn {
+  margin: 10px 0;
+  width: 100px;
+  padding: 10px;
+  background-color: #3898ec;
+  border-radius: 2px;
+  border: 2px solid #3898ec;
+  cursor: pointer;
+  color: #fff;
+  white-space: nowrap;
+}
