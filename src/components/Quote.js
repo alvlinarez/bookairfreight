@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styles/components/Quote.css';
 import QuoteBox from './QuoteBox';
 
@@ -7,7 +7,7 @@ const Quote = () => {
     startCountry: '',
     destCountry: '',
     price: '',
-    channel: 'air'
+    channel: ''
   }); // form values
 
   const [error, setError] = useState(null); // if error exists
@@ -24,6 +24,8 @@ const Quote = () => {
 
   const [showQuoteBox, setShowQuoteBox] = useState(false);
   // Quotebox initializes hidden
+
+  const [channelData, setChannelData] = useState([]);
 
   const { startCountry, destCountry, price, channel } = values;
 
@@ -47,34 +49,20 @@ const Quote = () => {
     if (channel === 'air') {
       startRange = generateRandomDays(3, 7);
       endRange = startRange + generateRandomDays(2, 4);
-
-      startDeliverDate = date.setDate(date.getDate() + startRange);
-      date = new Date();
-      endDeliverDate = date.setDate(date.getDate() + endRange);
-
-      setDeliveryValues({
-        ...deliveryValues,
-        startRange,
-        endRange,
-        startDeliverDate,
-        endDeliverDate
-      });
     } else {
       startRange = generateRandomDays(25, 30);
       endRange = startRange + generateRandomDays(5, 10);
-
-      startDeliverDate = date.setDate(date.getDate() + startRange);
-      date = new Date();
-      endDeliverDate = date.setDate(date.getDate() + endRange);
-
-      setDeliveryValues({
-        ...deliveryValues,
-        startRange,
-        endRange,
-        startDeliverDate,
-        endDeliverDate
-      });
     }
+    startDeliverDate = date.setDate(date.getDate() + startRange);
+    date = new Date();
+    endDeliverDate = date.setDate(date.getDate() + endRange);
+    setDeliveryValues({
+      ...deliveryValues,
+      startRange,
+      endRange,
+      startDeliverDate,
+      endDeliverDate
+    });
   };
 
   const handleSubmit = (e) => {
@@ -93,8 +81,10 @@ const Quote = () => {
     // If price is a number
     if (isNaN(price)) {
       setMsg('Price must be a number.');
+      setError(true);
       return;
     }
+
     // Validation success
     setError(null);
     setMsg('');
@@ -104,6 +94,26 @@ const Quote = () => {
     setQuoteValues(values);
     setShowQuoteBox(true);
   };
+
+  useEffect(() => {
+    const data = [
+      {
+        channel: 'air',
+        displayString: 'AirBook',
+        imgUrl: './assets/images/plane2.png',
+        minDays: 1,
+        maxDays: 2
+      },
+      {
+        channel: 'ocean',
+        displayString: 'Ocean Atlantic',
+        imgUrl: './assets/images/boat2.png',
+        minDays: 5,
+        maxDays: 10
+      }
+    ];
+    setChannelData(data);
+  }, []);
 
   return (
     <>
@@ -143,8 +153,12 @@ const Quote = () => {
             value={channel}
             onChange={handleChange}
           >
-            <option value="air">Air</option>
-            <option value="ocean">Ocean</option>
+            {channelData &&
+              channelData.map((c) => (
+                <option value={c.channel} key={c.channel}>
+                  {c.displayString}
+                </option>
+              ))}
           </select>
         </div>
         {error && <div className="error">{msg}</div>}
