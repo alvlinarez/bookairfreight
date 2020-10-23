@@ -1,0 +1,43 @@
+footer {
+  background-color: #007aff;
+  display: flex;
+  color: #ffffff;
+  font-weight: bold;
+  padding: 20px 80px;
+  bottom: 0;
+  position: fixed;
+}
+
+.footerTitle {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+}
+
+.footerTitle .footerTitleLogo {
+  width: 20%;
+}
+
+.footerTitle .footerTitleLogo img {
+  width: 100%;
+  cursor: pointer;
+}
+
+.footerTitle p {
+  margin: 0;
+}
+
+.footerMenu {
+  width: 30%;
+}
+
+.footerMenu ul {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  justify-content: space-around;
+}
+
+.footerMenu li {
+  cursor: pointer;
+}

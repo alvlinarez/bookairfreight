@@ -5,9 +5,11 @@ import Footer from './Footer';
 
 const Layout = ({ children }) => {
   return (
-    <div className="appContainer">
+    <div>
       <Navbar />
-      {children}
+
+      <div className="appContainer">{children}</div>
+
       <Footer />
     </div>
   );

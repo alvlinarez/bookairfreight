@@ -1,0 +1,9 @@
+.quoteTitle h1 {
+  font-weight: normal;
+  margin-bottom: 5px;
+}
+
+.textLink {
+  font-weight: bold;
+  color: #1875f0;
+}
