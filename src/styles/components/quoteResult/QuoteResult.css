@@ -1,0 +1,25 @@
+.quoteResultsContainer {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.quoteResultsContainer .cargoContainer {
+  width: 35%;
+  margin-top: 45px;
+}
+
+.quoteResultsContainer .freightOptionsContainer {
+  width: 65%;
+}
+
+.quoteResultsContainer .freightOptionsContainer h1 {
+  padding-bottom: 15px;
+  margin: 0;
+  font-size: 24px;
+  font-weight: normal;
+}
+
+.quoteResultsContainer .freightOptionsAirContainer {
+  padding-bottom: 30px;
+}

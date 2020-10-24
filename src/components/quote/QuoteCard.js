@@ -9,7 +9,7 @@ const QuoteCard = () => {
   return (
     <div className="cardContainer">
       <div className="cardTitle">
-        <span>Pickup & Delivery</span>
+        <span>Weight, Pickup & Delivery</span>
       </div>
       <div className="cardContent">
         <Weight />

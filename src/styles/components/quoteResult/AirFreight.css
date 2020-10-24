@@ -1,0 +1,98 @@
+.freightCard {
+  padding: 10px 30px;
+  margin-bottom: 30px;
+  border: 1px solid #007aff;
+  border-radius: 10px;
+  box-shadow: 1px 1px 3px 0 #7f8893;
+}
+
+.freightCard .freightCardDetails {
+  display: flex;
+  flex-direction: row;
+}
+
+.freightCard .freightCardDetails .freightCardDetailsItem {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+}
+
+.freightCard .freightCardDetails .freightCardDetailsItem span {
+  padding: 5px 0;
+}
+
+.freightCard .freightCardDetails .freightCardDetailsItem span .fa-plane-departure {
+  color: #007aff;
+}
+
+.freightCard .freightCardDetails .freightCardDetailsItem .price {
+  font-weight: bold;
+  font-size: 24px;
+  color: #007aff;
+  cursor: pointer;
+}
+
+.freightCard .freightCardDetails .freightCardDetailsItem .price i {
+  font-size: 17px;
+  color: #333;
+  margin-left: 10px;
+}
+
+.freightCard .freightCardDetails .freightCardDetailsItem .like {
+  text-align: right;
+  padding-bottom: 20px;
+}
+
+.freightCard .freightCardDetails .freightCardDetailsItem .like i {
+  color: #007aff;
+  cursor: pointer;
+  font-size: 24px;
+}
+
+.freightCard .freightCardDetails .freightCardDetailsItem button {
+  height: 40px;
+  margin-top: 0;
+  margin-bottom: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border: 1px solid #007aff;
+  border-radius: 10px;
+  text-align: center;
+  text-transform: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.freightCard .freightCardDetails .freightCardDetailsItem .selectButton {
+  background-color: #007aff;
+  color: #ffffff;
+}
+
+.freightCard .freightCardDetails .freightCardDetailsItem .shareButton {
+  background-color: #ffffff;
+  color: #007aff;
+}
+
+
+.freightCardMoreDetailsContainer {
+  width: 100%;
+}
+
+.freightCardMoreDetailsContainer .freightCardMoreDetails {
+  text-align: center;
+  padding-bottom: 5px;
+}
+
+.freightCardMoreDetailsContainer .freightCardMoreDetails > div {
+  border-bottom: 1px solid #007aff;
+  padding-bottom: 10px;
+}
+
+.freightCardMoreDetailsContainer .freightCardMoreDetails > div span {
+  width: 100%;
+  font-weight: bold;
+  cursor: pointer;
+}
+.freightCardMoreDetailsContainer .freightCardMoreDetails span i {
+  margin-left: 5px;
+}
