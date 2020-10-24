@@ -1,9 +1,10 @@
 import React from 'react';
 
-import '../../styles/components/quote/QuoteCard.css';
 import Weight from './Weight';
 import Pickup from './Pickup';
 import Deliver from './Deliver';
+
+import '../../styles/components/quote/QuoteCard.css';
 
 const QuoteCard = () => {
   return (

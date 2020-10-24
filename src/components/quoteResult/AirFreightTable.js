@@ -35,7 +35,7 @@ const AirFreightTable = () => {
         </tr>
         <tr>
           <td className="feeItem total">Total</td>
-          <td>Valid until 31Oct, 2020</td>
+          <td>Valid until 31 Oct, 2020</td>
           <td className="totalPrice">US$ 545.16</td>
         </tr>
       </tbody>

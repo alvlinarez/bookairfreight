@@ -58,3 +58,18 @@
   opacity: 0.6;
   padding-bottom: 15px;
 }
+
+.cardContainer .cardContent .cardInput {
+  height: 35px;
+  width: 150px;
+  border: 1px solid rgba(51, 51, 51, .1);
+  border-radius: 10px;
+  font-size: 14px;
+  text-align: center;
+  background-color: #ffffff;
+  outline: none;
+}
+
+.cardContainer .cardContent .cardInput:focus {
+  border: 1px solid #007aff;
+}
