@@ -73,3 +73,58 @@
 .cardContainer .cardContent .cardInput:focus {
   border: 1px solid #007aff;
 }
+
+
+/* PICKUP */
+.pickupSelectContainer {
+  width: 150px;
+}
+
+.originCountrySelectContainer {
+  width: 250px;
+}
+
+.citySelectContainer {
+  width: 300px;
+}
+
+/* END PICKUP */
+
+
+/* DELIVER */
+.destCountrySelectContainer {
+  width: 250px;
+}
+/* END DELIVER */
+
+/* CHECK RESULTS */
+.checkResultsContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.checkResultsContainer span {
+  text-align: center;
+  font-weight: bold;
+  padding-bottom: 15px;
+}
+
+.checkResultsContainer button {
+  width: 100%;
+  height: auto;
+  background-color: #ffc000;
+  box-shadow: 1px 1px 3px 0 #7f8893;
+  border-radius: 10px;
+  cursor: pointer;
+  color: #ffffff;
+  padding: 12px 15px;
+  font-size: 17px;
+  border: 0;
+  text-decoration: none;
+  outline: none;
+}
+
+.error {
+  color: #ff0000;
+  font-weight: bold;
+}

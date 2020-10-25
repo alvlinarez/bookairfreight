@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
-import DatePicker from 'react-datepicker';
 
 import '../../styles/components/quote/Pickup.css';
-import 'react-datepicker/dist/react-datepicker.css';
 
 const Pickup = () => {
   const pickUpOptions = [

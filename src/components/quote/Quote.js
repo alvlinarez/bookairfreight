@@ -2,7 +2,7 @@ import React from 'react';
 import QuoteCard from './QuoteCard';
 import '../../styles/components/quote/Quote.css';
 
-const Quote = (props) => {
+const Quote = () => {
   return (
     <div>
       <div className="quoteTitle">
@@ -15,13 +15,6 @@ const Quote = (props) => {
       </div>
 
       <QuoteCard />
-
-      <div className="checkResultsContainer">
-        <span>Shipment total: 1 carton, 10 cubic meters, 55 kgs</span>
-        <button onClick={() => props.history.push('/quote-results')}>
-          Check Results
-        </button>
-      </div>
     </div>
   );
 };

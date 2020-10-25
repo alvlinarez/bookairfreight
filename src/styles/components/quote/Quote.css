@@ -11,29 +11,3 @@
   font-weight: bold;
   color: #1875f0;
 }
-
-.checkResultsContainer {
-  display: flex;
-  flex-direction: column;
-}
-
-.checkResultsContainer span {
-  text-align: center;
-  font-weight: bold;
-  padding-bottom: 15px;
-}
-
-.checkResultsContainer button {
-  width: 100%;
-  height: auto;
-  background-color: #ffc000;
-  box-shadow: 1px 1px 3px 0 #7f8893;
-  border-radius: 10px;
-  cursor: pointer;
-  color: #ffffff;
-  padding: 12px 15px;
-  font-size: 17px;
-  border: 0;
-  text-decoration: none;
-  outline: none;
-}
