@@ -5,6 +5,7 @@ import '../../styles/components/quoteResult/Cargo.css';
 
 const Cargo = ({ quote }) => {
   const { weight, originCountry, destCountry } = quote;
+  // Routing
   const history = useHistory();
   return (
     <div className="cargoCard">

@@ -9,6 +9,8 @@ const AirFreightTable = ({ price, maxDaysDelivery, showDetails }) => {
     quote: { weight }
   } = quoteContext;
 
+  // Didnt know the shipping cost and the price per kilo neither
+  // so I made this custom operation but at the end it shows the real price
   const shippingCost = parseFloat(weight) * 7.5;
   const commission = price - shippingCost;
 

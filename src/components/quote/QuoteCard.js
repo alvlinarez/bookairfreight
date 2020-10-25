@@ -6,6 +6,7 @@ import '../../styles/components/quote/QuoteCard.css';
 import QuoteContext from '../../context/QuoteContext';
 
 const QuoteCard = () => {
+  // Routing
   const history = useHistory();
 
   const pickUpOptions = [
@@ -19,9 +20,11 @@ const QuoteCard = () => {
     destCountryOptions: []
   });
 
+  // Get quote state from context
   const quoteContext = useContext(QuoteContext);
   const { quote, setQuote } = quoteContext;
 
+  // Form values to set the quote initialized with quote state from the context
   const [values, setValues] = useState({
     weight: quote.weight,
     pickup: quote.pickup,
@@ -41,10 +44,12 @@ const QuoteCard = () => {
   } = selectOptionsValues;
 
   useEffect(() => {
+    // get origin countries
     fetchOriginCountry(selectOptionsValues, setSelectOptionsValues);
   }, []);
 
   const handleWeightChange = (e) => {
+    // verify if its number
     if (isNaN(e.target.value)) {
       return;
     }
@@ -60,8 +65,8 @@ const QuoteCard = () => {
       originCountry: e.value
     });
 
+    // when origin country changes, then fetch city and dest country
     await fetchCityAndCountry(
-      //originCountry,
       e.value,
       pickup,
       selectOptionsValues,
@@ -71,12 +76,13 @@ const QuoteCard = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // verify if the values are not empty
     if (weight === '' || originCountry === '' || destCountry === '') {
       setError(true);
       setMsg('All fields are required.');
       return;
     }
-    // verifying city if pickup is yes only
+    // verifying city is empty if pickup is yes only
     if (pickup === 1) {
       if (city === '') {
         setError(true);
@@ -86,7 +92,9 @@ const QuoteCard = () => {
     }
     setError(false);
     setMsg('');
+    // Modify quote values from context
     setQuote(values);
+    // Redirect
     history.push(
       `/quote-results?total_weight=${weight}&delivery_start_country=${originCountry}&delivery_dest_country=${destCountry}` +
         `${pickup === 1 ? `&pickup_start_city=${city}` : ''}`
@@ -138,6 +146,7 @@ const QuoteCard = () => {
                       setValues({
                         ...values,
                         pickup: e.value,
+                        // reset value of city if pickup is not selected
                         city: pickup === 1 ? city : ''
                       });
                     }}
@@ -230,12 +239,7 @@ const QuoteCard = () => {
       </div>
       <div className="checkResultsContainer">
         <span>Shipment total: 1 carton, 10 cubic meters, {weight} kgs</span>
-        <button
-          type="submit"
-          // onClick={() => history.push('/quote-results')}
-        >
-          Check Results
-        </button>
+        <button type="submit">Check Results</button>
       </div>
     </form>
   );

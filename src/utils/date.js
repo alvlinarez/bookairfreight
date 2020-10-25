@@ -1,9 +1,11 @@
+// Function to date to add Days
 Date.prototype.addDays = function (days) {
   const date = new Date(this.valueOf());
   date.setDate(date.getDate() + days);
   return date;
 };
 
+// Format Date to 07 Oct
 export const formatDate = (date) => {
   const monthNames = [
     'Jan',

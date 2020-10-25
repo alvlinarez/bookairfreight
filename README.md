@@ -5,8 +5,8 @@ Webpage to generate quotes from shipment information
 
 Features:
 
-* User can input info about shipment
-* System will display the quote
+* User can input info to generate shipment quotes
+* Website will display the quote results
 
 [See app in production](https://bookairfreight-alg.netlify.app)
 

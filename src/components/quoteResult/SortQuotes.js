@@ -55,6 +55,7 @@ const SortQuotes = ({ quoteResults, setQuoteResults }) => {
           options={sortOptions}
           onChange={(e) => {
             setSortValues({
+              // reset to initial state and update the sort value selected
               ...sortInitialState,
               [e.value]: true
             });

@@ -10,18 +10,22 @@ import { fetchQuoteResults } from '../../utils/fetchData';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import '../../styles/components/quote/Quote.css';
 import '../../styles/components/quoteResult/QuoteResult.css';
-import Select from 'react-select';
 import SortQuotes from './SortQuotes';
 
 const QuoteResult = (props) => {
+  // Get quote state from context
   const quoteContext = useContext(QuoteContext);
   const { quote, setQuote } = quoteContext;
 
+  // Initialize quote Results
   const [quoteResults, setQuoteResults] = useState([]);
+  // Loading state for spinner
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Getting values from url
     const values = queryString.parse(props.location.search);
+    // Updating quote state from context
     setQuote({
       weight: values.total_weight,
       pickup: values.pickup_start_city ? 1 : 0,
@@ -32,6 +36,7 @@ const QuoteResult = (props) => {
   }, []);
 
   useEffect(() => {
+    // get quote results from API
     fetchQuoteResults(quote, setQuoteResults, setLoading);
   }, [quote]);
 
@@ -75,7 +80,10 @@ const QuoteResult = (props) => {
               </div>
               <div className="freightOptionsNonAirContainer">
                 <h1>Non-air freight options</h1>
-                <NonAirFreight />
+                <NonAirFreight
+                  originCountry={quote.originCountry}
+                  destCountry={quote.destCountry}
+                />
               </div>
             </div>
           </div>

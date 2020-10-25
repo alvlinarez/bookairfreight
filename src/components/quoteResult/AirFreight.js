@@ -5,6 +5,7 @@ import AirFreightTable from './AirFreightTable';
 import { formatDate } from '../../utils/date';
 
 const AirFreight = ({ quoteDetails, index }) => {
+  // Show table state
   const [showDetails, setShowDetails] = useState(false);
   const { total_price, min_days_delivery, max_days_delivery } = quoteDetails;
   const date = new Date();
@@ -42,6 +43,7 @@ const AirFreight = ({ quoteDetails, index }) => {
           <button
             className="shareButton"
             onClick={() =>
+              // Alert to copy the url
               window.prompt(
                 'Share this link: Ctrl+C, Enter',
                 window.location.href

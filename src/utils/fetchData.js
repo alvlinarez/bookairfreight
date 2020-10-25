@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+// Needed to add value and label keys to all data values to display on all selects
 export const fetchOriginCountry = async (
   selectOptionsValues,
   setSelectOptionsValues
@@ -36,6 +37,7 @@ export const fetchCityAndCountry = async (
   try {
     const citiesUrl = `https://api-dev.bookairfreight.com/v1/interview/pickup-locations?country=${originCountry}`;
     const destCountriesUrl = `https://api-dev.bookairfreight.com/v1/interview/dest-countries?starting_country=${originCountry}`;
+    // If pickup city is selected only
     if (pickup === 1) {
       const [citiesRes, destCountriesRes] = await Promise.all([
         axios.get(citiesUrl),
@@ -82,6 +84,7 @@ export const fetchCityAndCountry = async (
 };
 
 export const fetchQuoteResults = async (quote, setQuoteResults, setLoading) => {
+  // Verifying if quote values are not empty
   const { weight, pickup, originCountry, city, destCountry } = quote;
   if (weight === '' && originCountry === '' && destCountry === '') {
     return;
@@ -93,6 +96,7 @@ export const fetchQuoteResults = async (quote, setQuoteResults, setLoading) => {
       }`
     );
     setQuoteResults(data.quotes);
+    // Disable loading spinner
     setLoading(false);
   } catch (e) {
     console.log(e);
