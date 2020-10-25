@@ -80,3 +80,22 @@ export const fetchCityAndCountry = async (
     });
   }
 };
+
+export const fetchQuoteResults = async (quote, setQuoteResults, setLoading) => {
+  const { weight, pickup, originCountry, city, destCountry } = quote;
+  if (weight === '' && originCountry === '' && destCountry === '') {
+    return;
+  }
+  try {
+    const { data } = await axios.get(
+      `https://api-dev.bookairfreight.com/v1/interview/quotes?total_weight=${weight}&delivery_start_country=${originCountry}&delivery_dest_country=${destCountry}${
+        pickup === 1 ? `&pickup_start_city=${city}` : ``
+      }`
+    );
+    setQuoteResults(data.quotes);
+    setLoading(false);
+  } catch (e) {
+    console.log(e);
+    setQuoteResults([]);
+  }
+};

@@ -61,6 +61,7 @@
   text-transform: none;
   cursor: pointer;
   font-size: 14px;
+  outline: none;
 }
 
 .freightCard .freightCardDetails .freightCardDetailsItem .selectButton {

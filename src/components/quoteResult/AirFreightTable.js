@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import '../../styles/components/quoteResult/AirFreightTable.css';
+import QuoteContext from '../../context/QuoteContext';
 
-const AirFreightTable = () => {
+const AirFreightTable = ({ price, maxDaysDelivery, showDetails }) => {
+  const quoteContext = useContext(QuoteContext);
+  const {
+    quote: { weight }
+  } = quoteContext;
+
+  const shippingCost = parseFloat(weight) * 7.5;
+  const commission = price - shippingCost;
+
   return (
-    <table>
+    <table style={{ display: showDetails ? 'table' : 'none' }}>
       <thead>
         <tr>
           <th>Fee items</th>
@@ -15,8 +24,8 @@ const AirFreightTable = () => {
       <tbody>
         <tr>
           <td className="feeItem">Shipping cost</td>
-          <td>US$ 8.85/KG, 55.00 KG chargeable</td>
-          <td>US$ 486.75</td>
+          <td>US$ 7.5/KG, {weight} KG chargeable</td>
+          <td>US$ {shippingCost.toFixed(2)}</td>
         </tr>
         <tr>
           <td className="feeItem">Insurance</td>
@@ -26,7 +35,7 @@ const AirFreightTable = () => {
         <tr>
           <td className="feeItem">Commission</td>
           <td />
-          <td>US$ 58.41</td>
+          <td>US$ {commission.toFixed(2)}</td>
         </tr>
         <tr>
           <td className="feeItem">Tax and duty</td>
@@ -35,8 +44,8 @@ const AirFreightTable = () => {
         </tr>
         <tr>
           <td className="feeItem total">Total</td>
-          <td>Valid until 31 Oct, 2020</td>
-          <td className="totalPrice">US$ 545.16</td>
+          <td>Valid until {maxDaysDelivery}, 2020</td>
+          <td className="totalPrice">US$ {price}</td>
         </tr>
       </tbody>
     </table>

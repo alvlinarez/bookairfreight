@@ -1,27 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import '../../styles/components/quoteResult/AirFreight.css';
 import AirFreightTable from './AirFreightTable';
+import { formatDate } from '../../utils/date';
 
-const AirFreight = () => {
+const AirFreight = ({ quoteDetails, index }) => {
+  const [showDetails, setShowDetails] = useState(false);
+  const { total_price, min_days_delivery, max_days_delivery } = quoteDetails;
+  const date = new Date();
   return (
     <div className="freightCard">
       <div className="freightCardDetails">
         <div className="freightCardDetailsItem">
-          <h1>Option 1 - DHL</h1>
+          <h1>Option {index} - DHL</h1>
           <span>
-            <i className="fas fa-plane-departure" /> 4 - 7 days
+            <i className="fas fa-plane-departure" /> {min_days_delivery} -{' '}
+            {max_days_delivery} days
           </span>
           <span>
             Estimated <span className="textLink">delivery</span> date:
           </span>
-          <span className="textLink">31 Oct - 03 Nov</span>
+          <span className="textLink">
+            {formatDate(date.addDays(min_days_delivery))} -{' '}
+            {formatDate(date.addDays(max_days_delivery))}
+          </span>
         </div>
 
         <div className="freightCardDetailsItem">
           <h1>Cheapest option!</h1>
-          <span className="price">
-            US$ 545.16 <i className="fas fa-angle-down" />
+          <span className="price" onClick={() => setShowDetails(!showDetails)}>
+            US$ {total_price} <i className="fas fa-angle-down" />
           </span>
           <span className="textLink">Tax and duty NOT included</span>
         </div>
@@ -31,19 +39,33 @@ const AirFreight = () => {
             <i className="far fa-heart" />
           </span>
           <button className="selectButton">Select</button>
-          <button className="shareButton">Share</button>
+          <button
+            className="shareButton"
+            onClick={() =>
+              window.prompt(
+                'Share this link: Ctrl+C, Enter',
+                window.location.href
+              )
+            }
+          >
+            Share
+          </button>
         </div>
       </div>
 
       <div className="freightCardMoreDetailsContainer">
         <div className="freightCardMoreDetails">
           <div>
-            <span>
-              Hide details
+            <span onClick={() => setShowDetails(!showDetails)}>
+              {showDetails ? 'Hide details' : 'Show details'}
               <i className="fas fa-angle-down" />
             </span>
           </div>
-          <AirFreightTable />
+          <AirFreightTable
+            showDetails={showDetails}
+            price={total_price}
+            maxDaysDelivery={formatDate(date.addDays(max_days_delivery))}
+          />
         </div>
       </div>
     </div>
