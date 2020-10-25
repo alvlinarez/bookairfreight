@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Select from 'react-select';
 import { fetchOriginCountry, fetchCityAndCountry } from '../../utils/fetchData';
 import '../../styles/components/quote/QuoteCard.css';
+import QuoteContext from '../../context/QuoteContext';
 
 const QuoteCard = () => {
   const history = useHistory();
@@ -18,12 +19,15 @@ const QuoteCard = () => {
     destCountryOptions: []
   });
 
+  const quoteContext = useContext(QuoteContext);
+  const { quote, setQuote } = quoteContext;
+
   const [values, setValues] = useState({
-    weight: '',
-    pickup: 1,
-    originCountry: '',
-    city: '',
-    destCountry: ''
+    weight: quote.weight,
+    pickup: quote.pickup,
+    originCountry: quote.originCountry,
+    city: quote.city,
+    destCountry: quote.destCountry
   });
 
   const [error, setError] = useState(null); // if error exists
@@ -82,6 +86,7 @@ const QuoteCard = () => {
     }
     setError(false);
     setMsg('');
+    setQuote(values);
     history.push(
       `/quote-results?total_weight=${weight}&delivery_start_country=${originCountry}&delivery_dest_country=${destCountry}` +
         `${pickup === 1 ? `&pickup_start_city=${city}` : ''}`
@@ -125,7 +130,9 @@ const QuoteCard = () => {
                 <span className="cardLabel">Need pickup?</span>
                 <div className="pickupSelectContainer">
                   <Select
-                    defaultValue={pickUpOptions[0]}
+                    defaultValue={pickUpOptions.filter(
+                      (p) => p.value === pickup
+                    )}
                     options={pickUpOptions}
                     onChange={(e) => {
                       setValues({
@@ -145,6 +152,14 @@ const QuoteCard = () => {
                     options={originCountryOptions}
                     placeholder="Select a country"
                     onChange={handleOriginCountryChange}
+                    defaultValue={
+                      originCountry === ''
+                        ? ''
+                        : {
+                            label: originCountry,
+                            value: originCountry
+                          }
+                    }
                   />
                 </div>
               </div>
@@ -163,6 +178,14 @@ const QuoteCard = () => {
                           city: e.value
                         });
                       }}
+                      defaultValue={
+                        city === ''
+                          ? ''
+                          : {
+                              label: city,
+                              value: city
+                            }
+                      }
                     />
                   </div>
                 </div>
@@ -189,6 +212,14 @@ const QuoteCard = () => {
                         destCountry: e.value
                       });
                     }}
+                    defaultValue={
+                      destCountry === ''
+                        ? ''
+                        : {
+                            label: destCountry,
+                            value: destCountry
+                          }
+                    }
                   />
                 </div>
               </div>
