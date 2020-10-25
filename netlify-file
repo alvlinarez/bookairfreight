@@ -1,0 +1,4 @@
+File to allow url refresh and avoid 404 page not found on netlify
+
+Create file netlify.toml and copy this:
+[[redirects]]   from = "/*"   to = "/index.html"   status = 200

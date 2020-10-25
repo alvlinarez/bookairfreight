@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
-module.exports = function(_env, argv) {
+module.exports = function (_env, argv) {
   const isProduction = argv.mode === 'production';
   const isDevelopment = !isProduction;
 
@@ -61,9 +61,10 @@ module.exports = function(_env, argv) {
       extensions: ['.js', '.jsx']
     },
     plugins: [
-      isProduction && new MiniCssExtractPlugin({
-        filename: 'assets/css/[name].[contenthash:8].chunk.css'
-      }),
+      isProduction &&
+        new MiniCssExtractPlugin({
+          filename: 'assets/css/[name].[contenthash:8].chunk.css'
+        }),
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify(
           isProduction ? 'production' : 'development'
@@ -71,7 +72,7 @@ module.exports = function(_env, argv) {
       }),
       new HtmlWebpackPlugin({
         template: path.resolve(__dirname, 'public/index.html'),
-        inject:true
+        inject: true
       })
     ].filter(Boolean),
     optimization: {
@@ -95,22 +96,23 @@ module.exports = function(_env, argv) {
         new OptimizeCssAssetsPlugin()
       ],
       splitChunks: {
-        chunks: 'async',
+        chunks: 'all',
         name: true,
         cacheGroups: {
           vendors: {
-            name: 'vendors',
-            chunks: 'all',
-            reuseExistingChunk: true,
-            priority: 1,
-            filename: isDevelopment ? 'assets/vendor.js' : 'assets/vendor-[hash].js',
-            enforce: true,
-            test(module, chunks) {
-              const name = module.nameForCondition && module.nameForCondition();
-              return chunks.some((chunk) => chunk.name !== 'vendors' && /[\\/]node_modules[\\/]/.test(name));
-            },
+            test: /[\\/]node_modules[\\/]/,
+            name(module, chunks, cacheGroupKey) {
+              const packageName = module.context.match(
+                /[\\/]node_modules[\\/](.*?)([\\/]|$)/
+              )[1];
+              return `${cacheGroupKey}.${packageName.replace('@', '')}`;
+            }
           },
-        },
+          common: {
+            minChunks: 2,
+            priority: -10
+          }
+        }
       },
       runtimeChunk: 'single'
     },
@@ -122,4 +124,4 @@ module.exports = function(_env, argv) {
       port: 3000
     }
   };
-}
+};
