@@ -24,9 +24,36 @@
   padding-bottom: 30px;
 }
 
+.quoteResultsContainer .freightOptionsAirContainer .freightOptionsAirTitle {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+/* LOADER */
+
 .loaderContainer {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 450px;
+}
+
+/* SORT */
+
+.sortContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 300px;
+  padding-bottom: 15px;
+}
+
+.sortContainer span {
+  width: 30%;
+}
+
+.sortContainer .sortSelect {
+  width: 70%;
 }

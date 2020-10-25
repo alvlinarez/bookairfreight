@@ -10,6 +10,8 @@ import { fetchQuoteResults } from '../../utils/fetchData';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import '../../styles/components/quote/Quote.css';
 import '../../styles/components/quoteResult/QuoteResult.css';
+import Select from 'react-select';
+import SortQuotes from './SortQuotes';
 
 const QuoteResult = (props) => {
   const quoteContext = useContext(QuoteContext);
@@ -58,7 +60,14 @@ const QuoteResult = (props) => {
 
             <div className="freightOptionsContainer">
               <div className="freightOptionsAirContainer">
-                <h1>Air freight options</h1>
+                <div className="freightOptionsAirTitle">
+                  <h1>Air freight options</h1>
+
+                  <SortQuotes
+                    quoteResults={quoteResults}
+                    setQuoteResults={setQuoteResults}
+                  />
+                </div>
                 {quoteResults &&
                   quoteResults.map((q, i) => (
                     <AirFreight quoteDetails={q} index={i + 1} key={i} />
