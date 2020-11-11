@@ -20,6 +20,10 @@ const QuoteCard = () => {
     destCountryOptions: []
   });
 
+  const [cachedOptionValues, setCachedOptionValues] = useState({
+    cachedOptions: []
+  });
+
   // Get quote state from context
   const quoteContext = useContext(QuoteContext);
   const { quote, setQuote } = quoteContext;
@@ -60,18 +64,34 @@ const QuoteCard = () => {
   };
 
   const handleOriginCountryChange = async (e) => {
+    // when origin country changes
+    const dataFromCache = cachedOptionValues.cachedOptions.find(
+      (cached) => cached.country === e.value
+    );
+    if (!dataFromCache) {
+      // then fetch city and dest country if there is no cached data
+      await fetchCityAndCountry(
+        e.value,
+        pickup,
+        selectOptionsValues,
+        setSelectOptionsValues,
+        cachedOptionValues,
+        setCachedOptionValues
+      );
+    } else {
+      setSelectOptionsValues({
+        ...selectOptionsValues,
+        cityOptions: dataFromCache.cities,
+        destCountryOptions: dataFromCache.destCountries
+      });
+    }
+
     setValues({
       ...values,
-      originCountry: e.value
+      originCountry: e.value,
+      city: '',
+      destCountry: ''
     });
-
-    // when origin country changes, then fetch city and dest country
-    await fetchCityAndCountry(
-      e.value,
-      pickup,
-      selectOptionsValues,
-      setSelectOptionsValues
-    );
   };
 
   const handleSubmit = (e) => {
@@ -138,9 +158,7 @@ const QuoteCard = () => {
                 <span className="cardLabel">Need pickup?</span>
                 <div className="pickupSelectContainer">
                   <Select
-                    defaultValue={pickUpOptions.filter(
-                      (p) => p.value === pickup
-                    )}
+                    value={pickUpOptions.filter((p) => p.value === pickup)}
                     options={pickUpOptions}
                     onChange={(e) => {
                       setValues({
@@ -161,7 +179,7 @@ const QuoteCard = () => {
                     options={originCountryOptions}
                     placeholder="Select a country"
                     onChange={handleOriginCountryChange}
-                    defaultValue={
+                    value={
                       originCountry === ''
                         ? ''
                         : {
@@ -187,7 +205,7 @@ const QuoteCard = () => {
                           city: e.value
                         });
                       }}
-                      defaultValue={
+                      value={
                         city === ''
                           ? ''
                           : {
@@ -221,7 +239,7 @@ const QuoteCard = () => {
                         destCountry: e.value
                       });
                     }}
-                    defaultValue={
+                    value={
                       destCountry === ''
                         ? ''
                         : {

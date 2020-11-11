@@ -7,6 +7,19 @@ import QuoteResult from './components/quoteResult/QuoteResult';
 import QuoteState from './context/QuoteState';
 
 const App = () => {
+  // If no localStorage object, initialize it
+  if (typeof window !== 'undefined') {
+    if (!localStorage.getItem('cachedOptions')) {
+      localStorage.setItem(
+        'cachedOptions',
+        JSON.stringify({
+          countries: [],
+          cities: [],
+          destCountries: []
+        })
+      );
+    }
+  }
   return (
     <BrowserRouter>
       <QuoteState>
